@@ -47,11 +47,11 @@ class Personagem {
     private String ancestry;
     private String species;
     private String patronus;
-    private boolean hogwartsStaff;
-    private boolean hogwartsStudent;
+    private String hogwartsStaff;
+    private String hogwartsStudent;
     private String actorName;
     private Lista alternativeActors;
-    private boolean alive;
+    private String alive;
     private LocalDate dateOfBirth;
     private String yearOfBirth;
     private String eyeColour;
@@ -68,11 +68,11 @@ class Personagem {
         ancestry = "";
         species = "";
         patronus = "";
-        hogwartsStaff = false;
-        hogwartsStudent = false;
+        hogwartsStaff = "";
+        hogwartsStudent = "";
         actorName = "";
         alternativeActors = new Lista(10);
-        alive = false;
+        alive = "";
         dateOfBirth = null;
         yearOfBirth = "";
         eyeColour = "";
@@ -134,21 +134,22 @@ class Personagem {
         return patronus;
     } // end getPatronus
 
-    public void setHogwartsStaff(boolean x) {
+    public void setHogwartsStaff(String x) {
         hogwartsStaff = x;
     } // end setHogwartsStaff
-
-    public boolean isHogwartsStaff() {
+    
+    public String isHogwartsStaff() {
         return hogwartsStaff;
     } // end isHogwartsStaff
-
-    public void setHogwartsStudent(boolean x) {
+    
+    public void setHogwartsStudent(String x) {
         hogwartsStudent = x;
     } // end setHogwartsStudent
-
-    public boolean isHogwartsStudent() {
+    
+    public String isHogwartsStudent() {
         return hogwartsStudent;
     } // end isHogwartsStudent
+    
 
     public void setActorName(String s) {
         actorName = s;
@@ -162,13 +163,14 @@ class Personagem {
         return alternativeActors;
     } // end getAlternativeActors
 
-    public void setAlive(boolean x) {
+    public void setAlive(String x) {
         alive = x;
     } // end setAlive
-
-    public boolean isAlive() {
+    
+    public String isAlive() {
         return alive;
     } // end isAlive
+    
 
     public void setDateOfBirth(LocalDate date) {
         dateOfBirth = date;
@@ -224,7 +226,7 @@ class Personagem {
         String[] data = line.split(";");
 
         setId(data[0]);
-        setName(data[1].trim());
+        setName(data[1]);
 
         String[] alternateNames = data[2].replace("[", "").replace("]", "").split(",");
         for (int i = 0; i < alternateNames.length; i++) {
@@ -239,10 +241,10 @@ class Personagem {
         setAncestry(data[4]);
         setSpecies(data[5]);
         setPatronus(data[6]);
-        setHogwartsStaff(data[7].equalsIgnoreCase("true"));
-        setHogwartsStudent(data[8].equalsIgnoreCase("true"));
+        setHogwartsStaff(data[7].equalsIgnoreCase("VERDADEIRO") ? "true" : "false");
+        setHogwartsStudent(data[8].equalsIgnoreCase("VERDADEIRO") ? "true" : "false");
         setActorName(data[9]);
-        setAlive(data[10].equalsIgnoreCase("true"));
+        setAlive(data[10].equalsIgnoreCase("VERDADEIRO") ? "true" : "false");
 
         String[] alternateActors = data[11].replace("[", "").replace("]", "").split(",");
         for (int i = 0; i < alternateActors.length; i++) {
@@ -295,8 +297,9 @@ class Personagem {
     }
 }
 
-public class TP2Q01 {
+public class TP2Q05 {
     private static List<Personagem> personagens = new ArrayList<>();
+    private static List<Personagem> sortByID = new ArrayList<>();
 
     // Método para ler os dados do arquivo "characters.csv" e criar objetos
     // Personagem correspondentes
@@ -322,22 +325,63 @@ public class TP2Q01 {
             if (p.getId().equals(id)) {
                 p.imprimir();
                 break;
-            } // ebd if
+            } // end if
         } // end for
     } // end searchByID
+
+    // Metodo para criar uma lista de  personagem pelo ID
+    private static void addByID(String id) {
+        for (Personagem p : personagens) {
+            if (p.getId().equals(id)) {
+                sortByID.add(p);
+                break;
+            } // end if
+        } // end for
+    } // end addByID
+
+    private static void selectionSort()
+    {
+        for(int i = 0; i < sortByID.size() - 1; i++)
+        {
+            int menor = i;
+            for(int j = i + 1; j < sortByID.size(); j++)
+            {
+                if(sortByID.get(j).getName().compareTo(sortByID.get(menor).getName()) > 0)
+                {
+                    menor = j;
+                } // end if
+            } // end for
+            if(menor != i)
+            {
+            Personagem tmp = sortByID.get(i);
+            sortByID.set(i,sortByID.get(menor));
+            sortByID.set(menor,tmp);    
+            } // end if 
+        } // end for 
+
+    } // end selectionSort
 
     // Método principal do programa
     public static void main(String[] args) {
         readFromFile(); // Lê os dados do arquivo
         Scanner scanner = new Scanner(System.in);
-        // String idBusca = scanner.nextLine();
         String line = "";
 
-        while (!line.equalsIgnoreCase("FIM") && scanner.hasNext()) {
-            line = scanner.nextLine();
-            searchByID(line); // Realiza a busca pelo ID
-        }
+        while (!line.equalsIgnoreCase("FIM")) {
+            line = scanner.nextLine().trim();
+            addByID(line); // adiciona ID por linha 
+        } // end while
 
-        scanner.close();
+         // Ordena os personagens pelo ID usando o Selection Sort
+    selectionSort();
+
+   // Aqui você pode imprimir ou realizar qualquer outra operação com a lista ordenada
+    for (int i = sortByID.size() - 1; i >= 0; i--) {
+    Personagem p = sortByID.get(i);
+    p.imprimir(); // Exemplo de impressão dos personagens ordenados
+} // end for
+
+
+    scanner.close();
     }
 }

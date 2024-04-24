@@ -224,7 +224,7 @@ class Personagem {
         String[] data = line.split(";");
 
         setId(data[0]);
-        setName(data[1].trim());
+        setName(data[1]);
 
         String[] alternateNames = data[2].replace("[", "").replace("]", "").split(",");
         for (int i = 0; i < alternateNames.length; i++) {
@@ -295,8 +295,9 @@ class Personagem {
     }
 }
 
-public class TP2Q01 {
+public class TP2Q03 {
     private static List<Personagem> personagens = new ArrayList<>();
+    private static List<String> addByID = new ArrayList<>();
 
     // Método para ler os dados do arquivo "characters.csv" e criar objetos
     // Personagem correspondentes
@@ -322,22 +323,58 @@ public class TP2Q01 {
             if (p.getId().equals(id)) {
                 p.imprimir();
                 break;
-            } // ebd if
+            } // end if
         } // end for
     } // end searchByID
+
+    // Metodo para criar uma lista de  personagem pelo ID
+    private static void addByID(String id) {
+        for (Personagem p : personagens) {
+            if (p.getId().equals(id)) {
+                addByID.add(p.getName());
+                break;
+            } // end if
+        } // end for
+    } // end addByID
+
+    private static boolean sequencialIDSearch(String name)
+    {
+
+       for(int i = 0; i < addByID.size(); i++)
+       {
+        if(name.equalsIgnoreCase(addByID.get(i)))
+        {
+            return true;
+        } // end if 
+       } // end for
+
+        return false;
+    } // end sequencialIDSearch
 
     // Método principal do programa
     public static void main(String[] args) {
         readFromFile(); // Lê os dados do arquivo
         Scanner scanner = new Scanner(System.in);
-        // String idBusca = scanner.nextLine();
         String line = "";
 
-        while (!line.equalsIgnoreCase("FIM") && scanner.hasNext()) {
-            line = scanner.nextLine();
-            searchByID(line); // Realiza a busca pelo ID
-        }
+        while (!line.equalsIgnoreCase("FIM")) {
+            line = scanner.nextLine().trim();
+            addByID(line); // adiciona ID por linha 
+        } // end while
 
+        // String para buscar pelo nome
+        String nome = "";
+        while (!(nome = scanner.nextLine().trim()).equalsIgnoreCase("FIM")) {
+            boolean resp = sequencialIDSearch(nome); // Realiza a busca pelo ID
+            if(resp)
+            {
+                System.out.println("SIM");
+            }
+            else
+            {
+                System.out.println("NAO");
+            } // end if 
+        } // end while
         scanner.close();
     }
 }
