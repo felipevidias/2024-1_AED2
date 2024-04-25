@@ -436,6 +436,66 @@ public class TP2Q11 {
             }
         }
     }
+
+    private static void countingSort() {
+        // Encontrar maior e menor valor do ano de nascimento
+        int minYear = Integer.MAX_VALUE;
+        int maxYear = Integer.MIN_VALUE;
+    
+        // Encontrar o menor e maior ano de nascimento
+        for (Personagem p : sortByID) {
+            int yearOfBirth = Integer.parseInt(p.getYearOfBirth());
+            if (yearOfBirth < minYear) {
+                minYear = yearOfBirth;
+            }
+            if (yearOfBirth > maxYear) {
+                maxYear = yearOfBirth;
+            }
+        }
+    
+        // Calcular intervalo entre anos
+        int range = maxYear - minYear + 1;
+    
+        // Inicializar array de contagem
+        int[] count = new int[range];
+    
+        // Contar o número de ocorrências de cada ano de nascimento
+        for (Personagem p : sortByID) {
+            int index = Integer.parseInt(p.getYearOfBirth()) - minYear;
+            count[index]++;
+        }
+    
+        // Calcular as posições finais de cada ano de nascimento no array ordenado
+        for (int i = 1; i < range; i++) {
+            count[i] += count[i - 1];
+        }
+    
+        // Construir o array ordenado com base nas contagens das posições finais
+        Personagem[] sortedArray = new Personagem[sortByID.size()];
+        for (int i = sortByID.size() - 1; i >= 0; i--) {
+            int index = Integer.parseInt(sortByID.get(i).getYearOfBirth()) - minYear;
+            sortedArray[count[index] - 1] = sortByID.get(i);
+            count[index]--;
+        }
+    
+        // Ordenar personagens pelo nome quando o ano de nascimento for igual
+        for (int i = 1; i < sortedArray.length; i++) {
+            int j = i - 1;
+            while (j >= 0 && Integer.parseInt(sortedArray[j].getYearOfBirth()) == Integer.parseInt(sortedArray[j + 1].getYearOfBirth())
+                    && sortedArray[j].getName().compareTo(sortedArray[j + 1].getName()) > 0) {
+                Personagem temp = sortedArray[j];
+                sortedArray[j] = sortedArray[j + 1];
+                sortedArray[j + 1] = temp;
+                j--;
+            }
+        }
+    
+        // Copiar o array ordenado de volta para a lista original
+        for (int i = 0; i < sortByID.size(); i++) {
+            sortByID.set(i, sortedArray[i]);
+        }
+    }
+    
     
 
     public static void main(String[] args) {
@@ -448,7 +508,7 @@ public class TP2Q11 {
             addByID(line); // adiciona ID por linha
         }
 
-        heapSort();
+        countingSort();
 
         for (Personagem p : sortByID) {
             p.imprimir(); // Imprimir todos os personagens ordenados

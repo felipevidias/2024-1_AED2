@@ -16,13 +16,13 @@ class Lista {
     public Lista(int capacidade) {
         this.elementos = new String[capacidade];
         this.tamanho = 0;
-    } // end Constructor
+    }
 
     // Método para adicionar um elemento à lista
     public void adicionar(String elemento) {
         this.elementos[this.tamanho] = elemento;
         this.tamanho++;
-    } // end adicionar
+    }
 
     // Método para obter um elemento da lista pelo índice
     public String obter(int indice) {
@@ -30,13 +30,13 @@ class Lista {
             throw new IllegalArgumentException("Índice inválido");
         }
         return this.elementos[indice];
-    } // end obter
+    }
 
     // Método para obter o tamanho atual da lista
     public int tamanho() {
         return this.tamanho;
-    } // end tamanho
-} // end Lista
+    }
+}
 
 // Classe para representar um personagem
 class Personagem {
@@ -79,144 +79,144 @@ class Personagem {
         gender = "";
         hairColour = "";
         wizard = "";
-    } // end Constructor
+    }
 
     // Métodos getters e setters para os atributos da classe Personagem
     public void setId(String s) {
         id = s;
-    } // end setId
+    }
 
     public String getId() {
         return id;
-    } // end getId
+    }
 
     public void setName(String s) {
         name = s;
-    } // end setName
+    }
 
     public String getName() {
         return name;
-    } // end getName
+    }
 
     public Lista getAlternativeNames() {
         return alternativeNames;
-    } // end getAlternativeNames
+    }
 
     public void setHouse(String s) {
         house = s;
-    } // end setHouse
+    }
 
     public String getHouse() {
         return house;
-    } // end getHouse
+    }
 
     public void setAncestry(String s) {
         ancestry = s;
-    } // end setAncestry
+    }
 
     public String getAncestry() {
         return ancestry;
-    } // end getAncestry
+    }
 
     public void setSpecies(String s) {
         species = s;
-    } // end setSpecies
+    }
 
     public String getSpecies() {
         return species;
-    } // end getSpecies
+    }
 
     public void setPatronus(String s) {
         patronus = s;
-    } // end setPatronus
+    }
 
     public String getPatronus() {
         return patronus;
-    } // end getPatronus
+    }
 
     public void setHogwartsStaff(String x) {
         hogwartsStaff = x;
-    } // end setHogwartsStaff
+    }
 
     public String isHogwartsStaff() {
         return hogwartsStaff;
-    } // end isHogwartsStaff
+    }
 
     public void setHogwartsStudent(String x) {
         hogwartsStudent = x;
-    } // end setHogwartsStudent
+    }
 
     public String isHogwartsStudent() {
         return hogwartsStudent;
-    } // end isHogwartsStudent
+    }
 
     public void setActorName(String s) {
         actorName = s;
-    } // end setActorName
+    }
 
     public String getActorName() {
         return actorName;
-    } // end getActorName
+    }
 
     public Lista getAlternativeActors() {
         return alternativeActors;
-    } // end getAlternativeActors
+    }
 
     public void setAlive(String x) {
         alive = x;
-    } // end setAlive
+    }
 
     public String isAlive() {
         return alive;
-    } // end isAlive
+    }
 
     public void setDateOfBirth(LocalDate date) {
         dateOfBirth = date;
-    } // end setDateOfBirth
+    }
 
     public LocalDate getDateOfBirth() {
         return dateOfBirth;
-    } // end getDateOfBirth
+    }
 
     public void setYearOfBirth(String data) {
         yearOfBirth = data;
-    } // end setYearOfBirth
+    }
 
     public String getYearOfBirth() {
         return yearOfBirth;
-    } // end getYearOfBirth
+    }
 
     public void setEyeColour(String s) {
         eyeColour = s;
-    } // end setEyeColour
+    }
 
     public String getEyeColour() {
         return eyeColour;
-    } // end getEyeColour
+    }
 
     public void setGender(String s) {
         gender = s;
-    } // end setGender
+    }
 
     public String getGender() {
         return gender;
-    } // end getGender
+    }
 
     public void setHairColour(String s) {
         hairColour = s;
-    } // end setHairColour
+    }
 
     public String getHairColour() {
         return hairColour;
-    } // end getHairColour
+    }
 
     public void setWizard(String s) {
         wizard = s;
-    } // end setWizard
+    }
 
     public String isWizard() {
         return wizard;
-    } // end isWizard
+    }
 
     // Método para ler os dados de uma linha e atribuir aos atributos da classe
     // Personagem
@@ -228,13 +228,13 @@ class Personagem {
 
         String[] alternateNames = data[2].replace("[", "").replace("]", "").split(",");
         for (int i = 0; i < alternateNames.length; i++) {
-            String name = alternateNames[i].trim(); // trim tira os espaços
+            String name = alternateNames[i].trim();
             name = name.replaceAll("^'|'$", "");
             if (!name.isEmpty()) {
                 alternativeNames.adicionar(name);
             }
         }
-        // Atribuição dos dados dos personagens aos atributos correspondentes
+
         setHouse(data[3]);
         setAncestry(data[4]);
         setSpecies(data[5]);
@@ -264,21 +264,20 @@ class Personagem {
         setGender(data[15]);
         setHairColour(data[16]);
         setWizard(data[17].equalsIgnoreCase("VERDADEIRO") ? "true" : "false");
-    } // end ler
+    }
 
-    // Metodo para imprimir os dados
+    // Método para imprimir os dados
     public void imprimir() {
-        // Imprime os detalhes do personagem encontrado
         System.out.print("[" + getId() + " ## " + getName() + " ## " + "{");
-        // Imprime os nomes alternativos
+
         if (getAlternativeNames().tamanho() > 0) {
             for (int i = 0; i < getAlternativeNames().tamanho() - 1; i++) {
                 System.out.print(getAlternativeNames().obter(i) + ", ");
-            } // end for
+            }
             System.out.print(getAlternativeNames().obter(getAlternativeNames().tamanho() - 1));
-        } // end if
+        }
         System.out.print("}");
-        // Imprime os detalhes restantes do personagem
+
         System.out.print(" ## " + getHouse() + " ## " + getAncestry() + " ## " + getSpecies() + " ## "
                 + getPatronus() + " ## " + isHogwartsStaff() + " ## " + isHogwartsStudent() + " ## "
                 + getActorName());
@@ -293,12 +292,10 @@ class Personagem {
     }
 }
 
-public class TP2Q07 {
+public class TP2Q18 {
     private static List<Personagem> personagens = new ArrayList<>();
     private static List<Personagem> sortByID = new ArrayList<>();
 
-    // Método para ler os dados do arquivo "characters.csv" e criar objetos
-    // Personagem correspondentes
     private static void readFromFile() {
         try (BufferedReader br = new BufferedReader(new FileReader("/tmp/characters.csv", Charset.forName("UTF-8")))) {
             String line;
@@ -307,103 +304,330 @@ public class TP2Q07 {
                 Personagem p = new Personagem();
                 p.ler(line);
                 personagens.add(p);
-            } // end while
+            }
         } catch (FileNotFoundException e) {
             System.out.println("NAO TEM ARQUIVO");
         } catch (IOException e) {
             System.out.println("LINHA NAO EXISTE");
-        } // end try
-    } // end readFromFile
+        }
+    }
 
-    // Método para buscar um personagem pelo ID
     private static void searchByID(String id) {
         for (Personagem p : personagens) {
             if (p.getId().equals(id)) {
                 p.imprimir();
                 break;
-            } // end if
-        } // end for
-    } // end searchByID
+            }
+        }
+    }
 
-    // Metodo para criar uma lista de personagem pelo ID
     private static void addByID(String id) {
         for (Personagem p : personagens) {
             if (p.getId().equals(id)) {
                 sortByID.add(p);
                 break;
-            } // end if
-        } // end for
-    } // end addByID
+            }
+        }
+    }
+
+    private static void swap(int i, int j) {
+        if (i >= 0 && i < sortByID.size() && j >= 0 && j < sortByID.size()) {
+            Personagem tmp = sortByID.get(i);
+            sortByID.set(i, sortByID.get(j));
+            sortByID.set(j, tmp);
+        }
+    }
+    
+    
 
     private static void selectionSort() {
         for (int i = 0; i < sortByID.size() - 1; i++) {
             int menor = i;
             for (int j = i + 1; j < sortByID.size(); j++) {
-                if (sortByID.get(j).getName().compareTo(sortByID.get(menor).getName()) > 0) {
+                if (sortByID.get(j).getName().compareTo(sortByID.get(menor).getName()) < 0) {
                     menor = j;
-                } // end if
-            } // end for
-            if (menor != i) {
-                Personagem tmp = sortByID.get(i);
-                sortByID.set(i, sortByID.get(menor));
-                sortByID.set(menor, tmp);
-            } // end if
-        } // end for
-
-    } // end selectionSort
-
-    public static void insertionSort2() {
-        for (int i = 1; i < sortByID.size(); i++) {
-            Personagem tmpPerson = sortByID.get(i);
-            int j = i - 1;
-            while ((j >= 0) && conditionInsertion2(sortByID.get(j), tmpPerson)) {
-                sortByID.set(j + 1, sortByID.get(j));
-                j--;
+                }
             }
-            sortByID.set(j + 1, tmpPerson);
+            if (menor != i) {
+                swap(i + 1, menor + 1);
+            }
         }
     }
-
-    private static boolean conditionInsertion(Personagem compare, Personagem current) {
-        return compare.getDateOfBirth().isAfter(current.getDateOfBirth());
-    }
-
-    private static boolean conditionInsertion2(Personagem compare, Personagem current) {
-        if (!compare.getDateOfBirth().isEqual(current.getDateOfBirth())) {
-            return compare.getDateOfBirth().isAfter(current.getDateOfBirth());
-        } else {
-            return compare.getName().compareTo(current.getName()) > 0;
-        }
-    }
+    
 
     public static void insertionSort() {
         for (int i = 1; i < sortByID.size(); i++) {
-            Personagem tmpPerson = sortByID.get(i); // Obter o objeto da lista
-            LocalDate tmpDate = tmpPerson.getDateOfBirth(); // Obter a data de nascimento do objeto
+            Personagem tmpPerson = sortByID.get(i);
+            LocalDate tmpDate = tmpPerson.getDateOfBirth();
 
             int j = i - 1;
             while (j >= 0) {
-                // Verificar se a data de aniversário é igual
                 if (sortByID.get(j).getDateOfBirth().isEqual(tmpDate)) {
-                    // Se a data de aniversário for igual, compare os nomes
                     if (sortByID.get(j).getName().compareTo(tmpPerson.getName()) > 0) {
                         sortByID.set(j + 1, sortByID.get(j));
                         j--;
                     } else {
                         break;
-                    } // end if
-                } else if (sortByID.get(j).getDateOfBirth().isAfter(tmpDate)) {
+                    }
+                } else if (sortByID.get(j).getDateOfBirth().compareTo(tmpDate) > 0) {
                     sortByID.set(j + 1, sortByID.get(j));
                     j--;
                 } else {
                     break;
-                } // end if
-            } // end while
+                }
+            }
             sortByID.set(j + 1, tmpPerson);
-        } // end for
-    } // end insertionSort
+        }
+    }
 
-    // Método principal do programa
+    private static boolean hasFilho(int i, int tam) {
+        return (i * 2 <= tam);
+    }
+
+    private static int getMaiorFilho(int i, int tam) {
+        int filho;
+        if ((2 * i == tam) || (sortByID.get(2 * i - 1).getHairColour().compareTo(sortByID.get(2 * i).getHairColour()) > 0)) {
+            filho = 2 * i;
+        } else {
+            filho = 2 * i + 1;
+        }
+        return filho;
+    }
+
+    private static void construir(int tam) {
+        for (int i = tam / 2; i >= 1; i--) {
+            reconstruir(i, tam);
+        }
+    }
+
+    private static void reconstruir(int i, int tam) {
+        while (hasFilho(i, tam)) {
+            int filho = getMaiorFilho(i, tam);
+            if (sortByID.get(i - 1).getHairColour().compareTo(sortByID.get(filho - 1).getHairColour()) < 0) {
+                swap(i, filho);
+                i = filho;
+            } else {
+                break;
+            }
+        }
+    }
+
+    private static void heapSort() {
+        // Construir o heap
+        for (int tam = 2; tam <= sortByID.size(); tam++) {
+            construir(tam);
+        }
+    
+        // Ordenação propriamente dita
+        int tam = sortByID.size();
+        while (tam > 1) {
+            swap(1, tam);
+            tam--;
+            reconstruir(1, tam);
+        }
+    
+        // Verificar se há personagens com a mesma cor de cabelo e ordená-los pelo nome
+        for (int i = 1; i < sortByID.size(); i++) {
+            int j = i - 1;
+            while (j >= 0 && sortByID.get(j).getHairColour().equals(sortByID.get(j + 1).getHairColour())) {
+                if (sortByID.get(j).getName().compareTo(sortByID.get(j + 1).getName()) > 0) {
+                    swap(j + 1, j + 2);
+                    j--;
+                } else {
+                    break;
+                }
+            }
+        }
+    }
+
+    private static void countingSort() {
+        // Encontrar maior e menor valor do ano de nascimento
+        int minYear = Integer.MAX_VALUE;
+        int maxYear = Integer.MIN_VALUE;
+    
+        // Encontrar o menor e maior ano de nascimento
+        for (Personagem p : sortByID) {
+            int yearOfBirth = Integer.parseInt(p.getYearOfBirth());
+            if (yearOfBirth < minYear) {
+                minYear = yearOfBirth;
+            }
+            if (yearOfBirth > maxYear) {
+                maxYear = yearOfBirth;
+            }
+        }
+    
+        // Calcular intervalo entre anos
+        int range = maxYear - minYear + 1;
+    
+        // Inicializar array de contagem
+        int[] count = new int[range];
+    
+        // Contar o número de ocorrências de cada ano de nascimento
+        for (Personagem p : sortByID) {
+            int index = Integer.parseInt(p.getYearOfBirth()) - minYear;
+            count[index]++;
+        }
+    
+        // Calcular as posições finais de cada ano de nascimento no array ordenado
+        for (int i = 1; i < range; i++) {
+            count[i] += count[i - 1];
+        }
+    
+        // Construir o array ordenado com base nas contagens das posições finais
+        Personagem[] sortedArray = new Personagem[sortByID.size()];
+        for (int i = sortByID.size() - 1; i >= 0; i--) {
+            int index = Integer.parseInt(sortByID.get(i).getYearOfBirth()) - minYear;
+            sortedArray[count[index] - 1] = sortByID.get(i);
+            count[index]--;
+        }
+    
+        // Ordenar personagens pelo nome quando o ano de nascimento for igual
+        for (int i = 1; i < sortedArray.length; i++) {
+            int j = i - 1;
+            while (j >= 0 && Integer.parseInt(sortedArray[j].getYearOfBirth()) == Integer.parseInt(sortedArray[j + 1].getYearOfBirth())
+                    && sortedArray[j].getName().compareTo(sortedArray[j + 1].getName()) > 0) {
+                Personagem temp = sortedArray[j];
+                sortedArray[j] = sortedArray[j + 1];
+                sortedArray[j + 1] = temp;
+                j--;
+            }
+        }
+    
+        // Copiar o array ordenado de volta para a lista original
+        for (int i = 0; i < sortByID.size(); i++) {
+            sortByID.set(i, sortedArray[i]);
+        }
+    }
+
+    private static void mergeSort(int esq, int dir) {
+        if (esq < dir) {
+            int meio = (esq + dir) / 2;
+            mergeSort(esq, meio);
+            mergeSort(meio + 1, dir);
+            intercalar(esq, meio, dir);
+        }
+    }
+    
+    private static void intercalar(int esq, int meio, int dir) {
+        // Definir tamanho dos dois subarrays
+        int nEsq = (meio - esq + 1);
+        int nDir = (dir - meio);
+    
+        List<Personagem> esqArray = new ArrayList<>(nEsq);
+        List<Personagem> dirArray = new ArrayList<>(nDir);
+    
+        // Copiar os elementos para os arrays temporários
+        for (int i = 0; i < nEsq; i++) {
+            esqArray.add(sortByID.get(esq + i));
+        }
+    
+        for (int j = 0; j < nDir; j++) {
+            dirArray.add(sortByID.get(meio + 1 + j));
+        }
+    
+        // Índices iniciais dos subarrays
+        int i = 0, j = 0;
+    
+        // Índice do array a ser preenchido
+        int k = esq;
+    
+        // Intercalar os arrays comparando pelo actorName
+        while (i < nEsq && j < nDir) {
+            if (esqArray.get(i).getActorName().compareTo(dirArray.get(j).getActorName()) <= 0) {
+                sortByID.set(k, esqArray.get(i));
+                i++;
+            } else {
+                sortByID.set(k, dirArray.get(j));
+                j++;
+            }
+            k++;
+        }
+    
+        // Copiar os elementos restantes do subarray esquerdo, se houver
+        while (i < nEsq) {
+            sortByID.set(k, esqArray.get(i));
+            i++;
+            k++;
+        }
+    
+        // Copiar os elementos restantes do subarray direito, se houver
+        while (j < nDir) {
+            sortByID.set(k, dirArray.get(j));
+            j++;
+            k++;
+        }
+    }
+
+    private static void partialSelection(int k) {
+        int n = 0;
+        for (int i = 0; i < sortByID.size() - 1; i++) {
+            if(n < k)
+            {
+            int menor = i;
+            for (int j = i + 1; j < sortByID.size(); j++) {
+                if (sortByID.get(j).getName().compareTo(sortByID.get(menor).getName()) < 0) {
+                    menor = j;
+                }
+            }
+            if (menor != i) {
+                swap(i + 1, menor + 1);
+            }
+            n++;
+            }
+        }
+    }
+
+    public static void partialInsertion(int k) {
+        for (int i = 1; i < sortByID.size(); i++) {
+            Personagem tmpPerson = sortByID.get(i);
+            LocalDate tmpDate = tmpPerson.getDateOfBirth();
+            int j = i - 1;
+            int n = 0; // Inicialize o contador aqui
+            while (j >= 0 && n < k) { // Mova a verificação aqui
+                if (sortByID.get(j).getDateOfBirth().isEqual(tmpDate)) {
+                    if (sortByID.get(j).getName().compareTo(tmpPerson.getName()) > 0) {
+                        sortByID.set(j + 1, sortByID.get(j));
+                        j--;
+                    } else {
+                        break;
+                    }
+                } else if (sortByID.get(j).getDateOfBirth().compareTo(tmpDate) > 0) {
+                    sortByID.set(j + 1, sortByID.get(j));
+                    j--;
+                } else {
+                    break;
+                }
+                n++; // Incrementar o contador aqui
+            }
+            sortByID.set(j + 1, tmpPerson);
+        }
+    }
+    
+    private static void quickSort(int esq, int dir) {
+        int i = esq, j = dir;
+        Personagem pivo = sortByID.get((esq + dir) / 2);
+        while (i <= j) {
+            while (sortByID.get(i).getHouse().compareTo(pivo.getHouse()) < 0 ||
+                   (sortByID.get(i).getHouse().equals(pivo.getHouse()) && sortByID.get(i).getName().compareTo(pivo.getName()) < 0))
+                i++;
+            while (sortByID.get(j).getHouse().compareTo(pivo.getHouse()) > 0 ||
+                   (sortByID.get(j).getHouse().equals(pivo.getHouse()) && sortByID.get(j).getName().compareTo(pivo.getName()) > 0))
+                j--; 
+            if (i <= j) {
+                swap(i, j);
+                i++;
+                j--;
+            }
+        }
+        if (esq < j)
+            quickSort(esq, j);
+        if (i < dir)
+            quickSort(i, dir);
+    }
+    
+    
+    
+
     public static void main(String[] args) {
         readFromFile(); // Lê os dados do arquivo
         Scanner scanner = new Scanner(System.in);
@@ -412,16 +636,13 @@ public class TP2Q07 {
         while (!line.equalsIgnoreCase("FIM")) {
             line = scanner.nextLine().trim();
             addByID(line); // adiciona ID por linha
-        } // end while
+        }
 
-        // Ordena os personagens pelo ID usando o Insertion Sort
-        insertionSort2();
+        quickSort(0, sortByID.size() - 1);
 
-        // Aqui você pode imprimir ou realizar qualquer outra operação com a lista
-        // ordenada
-        for (int i = 0; i < sortByID.size(); i++) {
-            Personagem p = sortByID.get(i);
-            p.imprimir(); // Imprimir apenas a data de aniversário
+        for(int i = 0; i < 10; i++)
+        {
+            sortByID.get(i).imprimir();
         }
 
         scanner.close();
