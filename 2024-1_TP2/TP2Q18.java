@@ -231,7 +231,7 @@ class Personagem {
             String name = alternateNames[i].trim();
             name = name.replaceAll("^'|'$", "");
             if (!name.isEmpty()) {
-                alternativeNames.adicionar(name);
+                alternativeNames.adicionar(name);                                                                                                                                                                                                                                                                                                                                                                                       
             }
         }
 
@@ -337,8 +337,6 @@ public class TP2Q18 {
             sortByID.set(j, tmp);
         }
     }
-    
-    
 
     private static void selectionSort() {
         for (int i = 0; i < sortByID.size() - 1; i++) {
@@ -353,7 +351,6 @@ public class TP2Q18 {
             }
         }
     }
-    
 
     public static void insertionSort() {
         for (int i = 1; i < sortByID.size(); i++) {
@@ -417,7 +414,7 @@ public class TP2Q18 {
         for (int tam = 2; tam <= sortByID.size(); tam++) {
             construir(tam);
         }
-    
+
         // Ordenação propriamente dita
         int tam = sortByID.size();
         while (tam > 1) {
@@ -425,7 +422,7 @@ public class TP2Q18 {
             tam--;
             reconstruir(1, tam);
         }
-    
+
         // Verificar se há personagens com a mesma cor de cabelo e ordená-los pelo nome
         for (int i = 1; i < sortByID.size(); i++) {
             int j = i - 1;
@@ -444,7 +441,7 @@ public class TP2Q18 {
         // Encontrar maior e menor valor do ano de nascimento
         int minYear = Integer.MAX_VALUE;
         int maxYear = Integer.MIN_VALUE;
-    
+
         // Encontrar o menor e maior ano de nascimento
         for (Personagem p : sortByID) {
             int yearOfBirth = Integer.parseInt(p.getYearOfBirth());
@@ -455,24 +452,24 @@ public class TP2Q18 {
                 maxYear = yearOfBirth;
             }
         }
-    
+
         // Calcular intervalo entre anos
         int range = maxYear - minYear + 1;
-    
+
         // Inicializar array de contagem
         int[] count = new int[range];
-    
+
         // Contar o número de ocorrências de cada ano de nascimento
         for (Personagem p : sortByID) {
             int index = Integer.parseInt(p.getYearOfBirth()) - minYear;
             count[index]++;
         }
-    
+
         // Calcular as posições finais de cada ano de nascimento no array ordenado
         for (int i = 1; i < range; i++) {
             count[i] += count[i - 1];
         }
-    
+
         // Construir o array ordenado com base nas contagens das posições finais
         Personagem[] sortedArray = new Personagem[sortByID.size()];
         for (int i = sortByID.size() - 1; i >= 0; i--) {
@@ -480,7 +477,7 @@ public class TP2Q18 {
             sortedArray[count[index] - 1] = sortByID.get(i);
             count[index]--;
         }
-    
+
         // Ordenar personagens pelo nome quando o ano de nascimento for igual
         for (int i = 1; i < sortedArray.length; i++) {
             int j = i - 1;
@@ -492,7 +489,7 @@ public class TP2Q18 {
                 j--;
             }
         }
-    
+
         // Copiar o array ordenado de volta para a lista original
         for (int i = 0; i < sortByID.size(); i++) {
             sortByID.set(i, sortedArray[i]);
@@ -507,30 +504,30 @@ public class TP2Q18 {
             intercalar(esq, meio, dir);
         }
     }
-    
+
     private static void intercalar(int esq, int meio, int dir) {
         // Definir tamanho dos dois subarrays
         int nEsq = (meio - esq + 1);
         int nDir = (dir - meio);
-    
+
         List<Personagem> esqArray = new ArrayList<>(nEsq);
         List<Personagem> dirArray = new ArrayList<>(nDir);
-    
+
         // Copiar os elementos para os arrays temporários
         for (int i = 0; i < nEsq; i++) {
             esqArray.add(sortByID.get(esq + i));
         }
-    
+
         for (int j = 0; j < nDir; j++) {
             dirArray.add(sortByID.get(meio + 1 + j));
         }
-    
+
         // Índices iniciais dos subarrays
         int i = 0, j = 0;
-    
+
         // Índice do array a ser preenchido
         int k = esq;
-    
+
         // Intercalar os arrays comparando pelo actorName
         while (i < nEsq && j < nDir) {
             if (esqArray.get(i).getActorName().compareTo(dirArray.get(j).getActorName()) <= 0) {
@@ -542,14 +539,14 @@ public class TP2Q18 {
             }
             k++;
         }
-    
+
         // Copiar os elementos restantes do subarray esquerdo, se houver
         while (i < nEsq) {
             sortByID.set(k, esqArray.get(i));
             i++;
             k++;
         }
-    
+
         // Copiar os elementos restantes do subarray direito, se houver
         while (j < nDir) {
             sortByID.set(k, dirArray.get(j));
@@ -602,7 +599,7 @@ public class TP2Q18 {
             sortByID.set(j + 1, tmpPerson);
         }
     }
-    
+
     private static void quickSort(int esq, int dir) {
         int i = esq, j = dir;
         Personagem pivo = sortByID.get((esq + dir) / 2);
@@ -624,9 +621,6 @@ public class TP2Q18 {
         if (i < dir)
             quickSort(i, dir);
     }
-    
-    
-    
 
     public static void main(String[] args) {
         readFromFile(); // Lê os dados do arquivo

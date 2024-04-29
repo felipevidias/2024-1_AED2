@@ -297,7 +297,7 @@ public class TP2Q13 {
     private static List<Personagem> sortByID = new ArrayList<>();
 
     private static void readFromFile() {
-        try (BufferedReader br = new BufferedReader(new FileReader("characters.csv", Charset.forName("UTF-8")))) {
+        try (BufferedReader br = new BufferedReader(new FileReader("/tmp/characters.csv", Charset.forName("UTF-8")))) {
             String line;
             br.readLine(); // Lê e descarta a primeira linha (cabeçalho)
             while ((line = br.readLine()) != null) {
@@ -530,7 +530,17 @@ public class TP2Q13 {
     
         // Intercalar os arrays comparando pelo actorName
         while (i < nEsq && j < nDir) {
-            if (esqArray.get(i).getActorName().compareTo(dirArray.get(j).getActorName()) <= 0) {
+            String actorNameEsq = esqArray.get(i).getActorName();
+            String actorNameDir = dirArray.get(j).getActorName();
+    
+            // Tratamento para atores com mesmo nome ou sem nome
+            if (actorNameEsq == null || actorNameEsq.isEmpty()) {
+                sortByID.set(k, esqArray.get(i));
+                i++;
+            } else if (actorNameDir == null || actorNameDir.isEmpty()) {
+                sortByID.set(k, dirArray.get(j));
+                j++;
+            } else if (actorNameEsq.compareTo(actorNameDir) <= 0) {
                 sortByID.set(k, esqArray.get(i));
                 i++;
             } else {
