@@ -583,7 +583,7 @@ void selectionSort(String *idArray, int n, int index) {
 int main(int argc, char const *argv[])
 {
     // ----------------- ler aquivo characters.csv --------------------
-    FILE *arq = fopen("characters.csv", "r");
+    FILE *arq = fopen("/tmp/characters.csv", "r");
     if (arq == NULL)
     {
         printf("Erro ao abrir o arquivo.");
@@ -644,7 +644,7 @@ int main(int argc, char const *argv[])
     execTime *= 1000;
 
     // ------------ Escrever no arquivo --------------
-    arq = fopen("matricula_quicksort.txt", "wt");
+    arq = fopen("817294_quicksort.txt", "wt");
     fprintf(arq, "817294\t %d \t%fms", count, execTime);
 
     // -------------------- Desalocar memoria ---------------------

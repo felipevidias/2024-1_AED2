@@ -744,8 +744,8 @@ for(int i = 0; i < 10; i++){
     execTime *= 1000;
 
     // ------------ Escrever no arquivo --------------
-    arq = fopen("matricula_quicksort.txt", "wt");
-    fprintf(arq, "815373\t %d \t%fms", count, execTime);
+    arq = fopen("817294_heapsort.txt", "wt");
+    fprintf(arq, "817294\t %d \t%fms", count, execTime);
 
     // -------------------- Desalocar memoria ---------------------
     for (size_t i = 0; i < 28; i++)
