@@ -764,7 +764,7 @@ int main(int argc, char const *argv[])
 
     // ------------ Escrever no arquivo --------------
     arq = fopen("matricula_quicksort2.txt", "wt");
-    fprintf(arq, "815373\t %d \t%fms", count, execTime);
+    fprintf(arq, "817294\t %d \t%fms", count, execTime);
 
     // -------------------- Desalocar memoria ---------------------
     free(personagens);
