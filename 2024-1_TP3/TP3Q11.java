@@ -825,7 +825,7 @@ public class TP3Q11 {
         long endTime = System.currentTimeMillis();
         long execTime = endTime - startTime;
         try (BufferedWriter BW = new BufferedWriter(new FileWriter("matricula_quicksort2_java.txt"))) {
-            BW.write("815373" + "\t" + personagem.getCountComp() + "\t" + personagem.getCountMov() + "\t" + execTime + "ms");
+            BW.write("817294" + "\t" + personagem.getCountComp() + "\t" + personagem.getCountMov() + "\t" + execTime + "ms");
         } catch (Exception e) {
             e.getStackTrace();
         }
